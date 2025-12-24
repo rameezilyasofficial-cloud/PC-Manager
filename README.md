@@ -20,7 +20,7 @@ While the app handles basic monitoring, it stands out due to these "Senior-level
 * **Native Registry Integration:** Handles auto-start capabilities by directly interacting with the Windows CurrentVersion/Run registry hive.
 
 ## 🚀 Installation
-1.  Navigate to the **[Releases]((https://github.com/rameezilyasofficial-cloud/PC-Manager/releases/download/v1.6/PCManagerSetup.exe)** section.
+1.  Navigate to the **[Releases]((https://github.com/rameezilyasofficial-cloud/PC-Manager/releases/tag/v1.6))** section.
 2.  Download `PCManagerSetup.exe` (built via Inno Setup).
 3.  Run the installer. *Note: If Windows warns about an 'Unknown Publisher', click **More Info** > **Run Anyway**.*
 
