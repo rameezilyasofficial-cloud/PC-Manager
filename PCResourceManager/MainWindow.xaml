@@ -1,0 +1,162 @@
+﻿<Window x:Class="PCResourceManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PC Resource Manager"
+        Icon="htop_103820.ico"
+        Height="650" Width="1000"
+        Background="#FBFBFB"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="#202020">
+            <StackPanel Margin="0,20,0,0">
+                <TextBlock Text="MANAGER PRO" Foreground="White" FontSize="18" FontWeight="Black" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+
+                <Button x:Name="NavDashBtn" Content="🏠 Dashboard" Height="45" Background="#333333" Foreground="White" BorderThickness="0" Margin="10,2" Click="Nav_Dashboard_Click"/>
+                <Button x:Name="NavRamBtn" Content="💾 RAM Optimizer" Height="45" Background="Transparent" Foreground="White" BorderThickness="0" Margin="10,2" Click="Nav_Ram_Click"/>
+                <Button x:Name="NavNetBtn" Content="🌐 Network Shield" Height="45" Background="Transparent" Foreground="White" BorderThickness="0" Margin="10,2" Click="Nav_Network_Click"/>
+
+                <Separator Margin="20,20" Background="#444444"/>
+
+                <Button Content="⚙️ Settings" Height="45" Background="Transparent" Foreground="White" BorderThickness="0" Cursor="Hand" Margin="10,2" Click="OpenSettings_Click"/>
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Column="1" Margin="30">
+
+            <Grid x:Name="DashboardView" Visibility="Visible">
+                <StackPanel>
+                    <TextBlock Text="System Overview" FontSize="28" FontWeight="SemiBold" Margin="0,0,0,20"/>
+
+                    <UniformGrid Columns="2" Margin="0,0,0,20">
+                        <Border Background="#0078D7" CornerRadius="8" Padding="20" Margin="0,0,10,0">
+                            <StackPanel>
+                                <TextBlock Text="System Status" Foreground="White" Opacity="0.8"/>
+                                <TextBlock Text="Active &amp; Monitoring" Foreground="White" FontSize="22" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Background="#107C10" CornerRadius="8" Padding="20" Margin="10,0,0,0">
+                            <StackPanel>
+                                <TextBlock Text="Protection Level" Foreground="White" Opacity="0.8"/>
+                                <TextBlock Text="Standard" Foreground="White" FontSize="22" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
+                    </UniformGrid>
+
+                    <TextBlock Text="Top 5 Memory Hogs (Live)" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
+
+                    <ListView x:Name="TopAppsList" BorderThickness="0" Background="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#F0F0F0" BorderThickness="0,0,0,1" Padding="10">
+                                    <Grid Width="650">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Grid.Column="0" Source="{Binding Icon}" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0">
+                                            <TextBlock Text="{Binding DisplayName}" FontSize="15" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                                            <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                                <TextBlock Text="{Binding MemoryMB, StringFormat='RAM: {0} MB'}" FontSize="13" Foreground="Gray"/>
+                                                <TextBlock Text=" | " FontSize="13" Foreground="#CCCCCC" Margin="8,0"/>
+                                                <TextBlock Text="{Binding DataUsageText}" FontSize="13" Foreground="#0078D7" FontWeight="SemiBold"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="RamView" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="RAM Optimizer" FontSize="28" FontWeight="SemiBold" Margin="0,0,0,20"/>
+
+                    <Border Background="White" CornerRadius="8" Padding="25">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="15" Direction="270" ShadowDepth="2" Opacity="0.1"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <DockPanel>
+                                <TextBlock Text="Memory Management" FontSize="18" FontWeight="Bold"/>
+                                <TextBlock Text="Active" Foreground="Green" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            </DockPanel>
+                            <Separator Margin="0,15"/>
+                            <TextBlock Text="Target Application" Foreground="Gray" Margin="0,0,0,5"/>
+
+                            <Button x:Name="ProcessSelectBtn" Content="Browse Running Processes..." Height="35" Background="#F3F3F3" Click="BrowseProcesses_Click"/>
+
+                            <Grid Margin="0,20,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,10,0" VerticalAlignment="Bottom">
+                                    <TextBlock Text="RAM Limit (MB)" Foreground="Gray" Margin="0,0,0,5"/>
+                                    <TextBox x:Name="RamInputBox" Text="1024" Padding="8" FontSize="16" Height="45" VerticalContentAlignment="Center"/>
+                                </StackPanel>
+
+                                <Button x:Name="ApplyRamBtn" 
+                                        Grid.Column="1" 
+                                        Content="Apply Limit" 
+                                        Background="#0078D7" 
+                                        Foreground="White" 
+                                        FontWeight="Bold" 
+                                        Height="45" 
+                                        VerticalAlignment="Bottom" 
+                                        Click="ApplyRamLimit_Click"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="NetworkView" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Network Shield" FontSize="28" FontWeight="SemiBold" Margin="0,0,0,20"/>
+
+                    <Border Background="White" CornerRadius="8" Padding="25">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="15" Direction="270" ShadowDepth="2" Opacity="0.1"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <TextBlock Text="Network &amp; IO Limiter" FontSize="18" FontWeight="Bold"/>
+                            <Separator Margin="0,15"/>
+
+                            <TextBlock Text="Target Application" Foreground="Gray" Margin="0,0,0,5"/>
+
+                            <Button x:Name="NetSelectBtn" Content="Select App to Limit..." Height="35" Background="#F3F3F3" Click="NetSelectBtn_Click"/>
+
+                            <TextBlock Text="Max Allowed Speed (KB/s)" Foreground="Gray" Margin="0,15,0,0"/>
+
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox x:Name="SpeedLimitBox" Text="500" FontSize="16" Padding="10" VerticalContentAlignment="Center"/>
+
+                                <Button x:Name="ToggleLimitBtn" Grid.Column="1" Content="Enable Limit" Background="#107C10" Foreground="White" Width="120" Height="45" FontWeight="Bold" Margin="10,0,0,0" Click="ToggleLimitBtn_Click"/>
+                            </Grid>
+
+                            <TextBlock Text="Set to 0 for Unlimited" FontSize="10" Foreground="Gray" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Window>
