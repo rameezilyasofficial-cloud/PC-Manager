@@ -1,6 +1,6 @@
-# PC Manager v1.5 - Advanced System Utility
+# PC Manager v1.6 - Advanced System Utility
 
-**PC Manager** is a high-performance Windows utility engineered to give users granular control over system resources. Built with C# and WPF, it provides deep integration with the Windows OS to manage runaway processes and optimize performance on hardware like the **HP 280 G2 SFF**.
+**PC Manager** is a high-performance Windows utility engineered to give users granular control over system resources. Built with C# and WPF, it provides deep integration with the Windows OS to manage runaway processes and optimize performance, specifically tested on hardware like the **HP 280 G2 SFF**.
 
 Developed by **Rameez Ahmad** (@Pak Prime Deals).
 
@@ -11,28 +11,26 @@ Developed by **Rameez Ahmad** (@Pak Prime Deals).
 * **The Solution:** PC Manager implements low-level Windows APIs to enforce strict resource limits, ensuring the system remains responsive even under heavy load.
 
 ## 🛠 Advanced Technical Features
-While the app handles basic monitoring, it stands out due to these "Senior-level" implementations:
+This application demonstrates professional-grade implementations of Windows system-level programming:
 
-* **Job Object Memory Limiter:** Unlike standard task managers, this uses **Windows Job Objects** to hard-cap the physical memory (Working Set) an application can claim. This prevents memory leaks from crashing the system.
-* **Process Throttler (CPU/IO):** Implements a custom throttling logic to reduce the priority and execution cycles of non-essential background tasks during high-intensity work.
-* **Live Dashboard:** A real-time monitoring system that identifies "Memory Hogs" using optimized LINQ queries and `System.Diagnostics`.
-* **Junk Cleaner:** A specialized module to scrub system temporary directories and recover wasted disk space.
-* **Native Registry Integration:** Handles auto-start capabilities by directly interacting with the Windows CurrentVersion/Run registry hive.
+* **Job Object Memory Limiter:** Utilizes **Windows Job Objects** to hard-cap the physical memory (Working Set) an application can claim, preventing memory leaks from impacting system stability.
+* **Network & IO Throttling:** Implements custom logic to monitor and limit the network speed of specific processes, ensuring bandwidth is available for critical tasks.
+* **Live Dashboard:** A real-time monitoring interface that identifies "Memory Hogs" using optimized LINQ queries and the `System.Diagnostics` namespace.
+* **Automated Junk Cleaner:** A specialized module that safely scrubs system temporary directories to recover wasted disk space.
+* **Native Registry Integration:** Handles auto-start capabilities by programmatically interacting with the Windows `CurrentVersion/Run` registry hive.
 
-## 🚀 Installation
-1.  Navigate to the **[Releases]((https://github.com/rameezilyasofficial-cloud/PC-Manager/releases/tag/v1.6))** section.
-2.  Download `PCManagerSetup.exe` (built via Inno Setup).
-3.  Run the installer. *Note: If Windows warns about an 'Unknown Publisher', click **More Info** > **Run Anyway**.*
+## 🚀 Installation & Download
+**Ready to use?** Download the latest stable installer here:
+👉 **[Download PC Manager v1.6 (Official Release)](https://github.com/rameezilyasofficial-cloud/PC-Manager/releases/tag/v1.6)**
+
+1. Download `PCManagerSetup.exe`.
+2. Run the installer (created via Inno Setup).
+3. *Note: If Windows SmartScreen appears, click **More Info** > **Run Anyway**.*
 
 ## 💻 Tech Stack
 * **Language:** C# 12.0
 * **Framework:** .NET 10.0 (WPF)
-* **Deployment:** Inno Setup Compiler
-* **Architecture:** Modular design with separated Core logic, Models, and UI layers.
-
-## 🛠 Requirements
-* **OS:** Windows 10/11 (x64)
-* **Permissions:** Administrator privileges (required for Job Object manipulation and Registry access).
+* **Architecture:** Modular Layered Architecture (Core, Models, Utils, UI).
 
 ---
 ### 👨‍💻 About the Developer
